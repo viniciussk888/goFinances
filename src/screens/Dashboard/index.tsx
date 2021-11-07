@@ -1,4 +1,5 @@
 import React from "react";
+import { HighLigthCard } from "../../components/HighLigthCard";
 
 import {
   Container,
@@ -10,6 +11,7 @@ import {
   UserInfo,
   UserName,
   Icon,
+  HighLigthCards,
 } from "./styles";
 
 export const Dashboard: React.FC = () => {
@@ -32,6 +34,26 @@ export const Dashboard: React.FC = () => {
           <Icon name="power" />
         </UserWrapper>
       </Header>
+      <HighLigthCards>
+        <HighLigthCard
+          type="up"
+          title="Entradas"
+          amount="R$ 17.000,00"
+          lastTransaction="Ultima entrada 10 de abril"
+        />
+        <HighLigthCard
+          type="down"
+          title="Saidas"
+          amount="R$ 18.000,00"
+          lastTransaction="Ultima saida 12 de abril"
+        />
+        <HighLigthCard
+          type="total"
+          title="Total"
+          amount="R$ 20.000,00"
+          lastTransaction="01 à 19 de abril"
+        />
+      </HighLigthCards>
     </Container>
   );
 };
