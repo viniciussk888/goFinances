@@ -1,7 +1,10 @@
 import React from "react";
 
 import { HighLigthCard } from "../../components/HighLigthCard";
-import { TransactionCard } from "../../components/TransactionCard";
+import {
+  TransactionCard,
+  TransactionCardProps,
+} from "../../components/TransactionCard";
 
 import {
   Container,
@@ -16,9 +19,50 @@ import {
   HighLigthCards,
   Transactions,
   Title,
+  TransactionList,
 } from "./styles";
 
+export interface DataListProps extends TransactionCardProps {
+  id: string;
+}
+
 export const Dashboard: React.FC = () => {
+  const data: DataListProps[] = [
+    {
+      id: "1",
+      type: "positive",
+      amount: "R$ 12.000,00",
+      title: "Desenvolvimento",
+      date: "20/01/2021",
+      category: {
+        name: "Vendas",
+        icon: "dollar-sign",
+      },
+    },
+    {
+      id: "2",
+      type: "negative",
+      amount: "R$ 12.000,00",
+      title: "Aluguel Casa",
+      date: "20/01/2021",
+      category: {
+        name: "Casa",
+        icon: "shopping-bag",
+      },
+    },
+    {
+      id: "3",
+      type: "positive",
+      amount: "R$ 12.000,00",
+      title: "Desenvolvimento",
+      date: "20/01/2021",
+      category: {
+        name: "Vendas",
+        icon: "dollar-sign",
+      },
+    },
+  ];
+
   return (
     <Container>
       <Header>
@@ -61,8 +105,11 @@ export const Dashboard: React.FC = () => {
       </HighLigthCards>
       <Transactions>
         <Title>Listagem</Title>
-
-        <TransactionCard />
+        <TransactionList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+        />
       </Transactions>
     </Container>
   );
