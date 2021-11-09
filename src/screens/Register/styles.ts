@@ -32,3 +32,8 @@ export const Form = styled.View`
 `;
 
 export const Filds = styled.View``;
+
+export const TransactionsTypes = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
