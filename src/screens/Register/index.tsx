@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Container, Header, Title, Form } from "./styles";
+import { Container, Header, Title, Form, Filds } from "./styles";
 
 import { Input } from "../../components/Forms/Input";
+import { Button } from "../../components/Forms/Button";
 
 export const Register: React.FC = () => {
   return (
@@ -11,9 +12,12 @@ export const Register: React.FC = () => {
         <Title>Cadastro</Title>
       </Header>
       <Form>
-        <Input placeholder="Nome" />
+        <Filds>
+          <Input placeholder="Nome" />
+          <Input placeholder="Preço" />
+        </Filds>
 
-        <Input placeholder="Preço" />
+        <Button title="Enviar" />
       </Form>
     </Container>
   );
