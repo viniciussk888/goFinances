@@ -89,7 +89,7 @@ export const Register: React.FC = () => {
         key: "category",
         name: "Categoria",
       });
-      navigation.navigate("Listagem");
+      navigation.navigate("Listagem" as never);
     } catch (error) {
       console.log(error);
       return Alert.alert("Atenção", "Não foi possivel salvar");
