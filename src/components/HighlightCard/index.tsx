@@ -23,7 +23,7 @@ const icon = {
   total: "dollar-sign",
 };
 
-export const HighLigthCard: React.FC<Props> = ({
+export const HighlightCard: React.FC<Props> = ({
   amount,
   lastTransaction,
   title,

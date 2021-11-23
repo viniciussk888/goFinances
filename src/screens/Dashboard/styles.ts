@@ -73,7 +73,7 @@ export const Icon = styled(Feather)`
 
 export const LogoutButton = styled(BorderlessButton)``;
 
-export const HighLigthCards = styled.ScrollView.attrs({
+export const HighlightCards = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
   contentContainerStyle: { paddingHorizontal: 24 },
@@ -97,7 +97,7 @@ export const Title = styled.Text`
   margin-bottom: 16px;
 `;
 
-export const TransactionList = styled(
+export const TransactionsList = styled(
   FlatList as new () => FlatList<DataListProps>
 ).attrs({
   showsVerticalScrollIndicator: false,
@@ -105,3 +105,9 @@ export const TransactionList = styled(
     paddingBottom: getBottomSpace(),
   },
 })``;
+
+export const LoadContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
