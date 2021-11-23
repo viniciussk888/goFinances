@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import { HighLigthCard } from "../../components/HighLigthCard";
 import {
   TransactionCard,
   TransactionCardProps,
 } from "../../components/TransactionCard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   Container,
@@ -16,52 +17,56 @@ import {
   UserInfo,
   UserName,
   Icon,
+  LogoutButton,
   HighLigthCards,
   Transactions,
   Title,
   TransactionList,
 } from "./styles";
+import { useFocusEffect } from "@react-navigation/native";
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
 }
 
 export const Dashboard: React.FC = () => {
-  const data: DataListProps[] = [
-    {
-      id: "1",
-      type: "positive",
-      amount: "R$ 12.000,00",
-      title: "Desenvolvimento",
-      date: "20/01/2021",
-      category: {
-        name: "Vendas",
-        icon: "dollar-sign",
-      },
-    },
-    {
-      id: "2",
-      type: "negative",
-      amount: "R$ 12.000,00",
-      title: "Aluguel Casa",
-      date: "20/01/2021",
-      category: {
-        name: "Casa",
-        icon: "shopping-bag",
-      },
-    },
-    {
-      id: "3",
-      type: "positive",
-      amount: "R$ 12.000,00",
-      title: "Desenvolvimento",
-      date: "20/01/2021",
-      category: {
-        name: "Vendas",
-        icon: "dollar-sign",
-      },
-    },
-  ];
+  const datakey = "@gofinances:transactions";
+  const [data, setData] = useState<DataListProps[]>([]);
+
+  async function loadTransaction() {
+    const response = await AsyncStorage.getItem(datakey);
+    const transactions = response ? JSON.parse(response) : [];
+
+    const transactionsFormated: DataListProps[] = transactions.map(
+      (item: DataListProps) => {
+        const amount = Number(item.amount).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+        const date = Intl.DateTimeFormat("pt-br", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "2-digit",
+        }).format(new Date(item.date));
+
+        return {
+          id: item.id,
+          name: item.name,
+          amount,
+          type: item.type,
+          category: item.category,
+          date,
+        };
+      }
+    );
+    setData(transactionsFormated);
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      loadTransaction();
+    }, [])
+  );
 
   return (
     <Container>
@@ -78,8 +83,9 @@ export const Dashboard: React.FC = () => {
               <UserName>Alberto</UserName>
             </User>
           </UserInfo>
-
-          <Icon name="power" />
+          <LogoutButton onPress={() => {}}>
+            <Icon name="power" />
+          </LogoutButton>
         </UserWrapper>
       </Header>
 
